@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 from typing import Optional
-import datetime
+from datetime import date
 
 class PostSchema(BaseModel):
     id: Optional[int]
     title: str
     content: str
-    created_at: Optional[datetime.datetime]
+    description:str
+    created_at: Optional[date]=date.today()

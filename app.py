@@ -21,3 +21,5 @@ app.add_middleware(
 )
 
 app.include_router(r)
+
+#anyio cffi click cryptography fastapi greenlet h11 idna pycparser pydantic PyMySQL python-dotenv sniffio SQLAlchemy starlette typing-extensions uvicorn
