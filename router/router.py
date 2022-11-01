@@ -1,15 +1,27 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response,FastAPI, File, UploadFile
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
 from schema.post_schema import PostSchema
 from config.db import engine
 from model.posts import posts
-from typing import List
+from typing import List, Union
+from sqlalchemy import text
+
+#define router
 r = APIRouter()
 
+#get all posts
 @r.get("/api/post", response_model=List[PostSchema])
 def get_posts():
     with engine.connect() as conn:
         result = conn.execute(posts.select()).fetchall()
+
+    return result
+
+#get all of posts by category
+@r.get("/api/cat/{post_section}", response_model=List[PostSchema])
+def get_posts_by_cat(post_section: str):
+    with engine.connect() as conn:
+        result = conn.execute(posts.select().where(posts.c.section==post_section)).fetchall()
 
     return result
 
@@ -44,3 +56,6 @@ def delete(data_update: PostSchema, post_id: int):
 
 
         return Response(status_code=HTTP_204_NO_CONTENT)
+    
+    
+    

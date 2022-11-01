@@ -8,6 +8,10 @@ posts = Table("posts",meta_data,
                 Column("title",String(150),nullable=True,unique=True),
                 Column("description",String(666)),
                 Column("content",String(2000),nullable=True),
-                Column("created_at",DateTime))
+                Column("created_at",DateTime),
+                Column("section",String(666)),
+                Column("tag",String(1000)),
+                Column("gitlink",String(300))
+                )
 
 meta_data.create_all(engine)

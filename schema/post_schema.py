@@ -8,3 +8,6 @@ class PostSchema(BaseModel):
     content: str
     description:str
     created_at: Optional[date]=date.today()
+    section: str
+    tag: str
+    gitlink: str
