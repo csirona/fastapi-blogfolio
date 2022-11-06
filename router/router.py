@@ -43,7 +43,8 @@ def create_post(data_post:PostSchema):
 @r.put("/api/post/{post_id}")
 def update(data_update: PostSchema, post_id: int):
     with engine.connect() as conn:
-        conn.execute(posts.update().values(title=data_update.title,content=data_update.content).where(posts.c.id == post_id))
+        conn.execute(posts.update().values(title=data_update.title,content=data_update.content,description=data_update.description,
+                                           section=data_update.section,tag=data_update.tag,gitlink=data_update.gitlink).where(posts.c.id == post_id))
 
         result = conn.execute(posts.select().where(posts.c.id == post_id)).first()
 
